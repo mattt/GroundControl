@@ -1,5 +1,5 @@
 # GroundControl
-** Remote configuration for iOS **
+**Remote configuration for iOS**
 
 > Break free of the two-week tyranny of the App Store approval process!
 
