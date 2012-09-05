@@ -56,6 +56,22 @@ get '/defaults.plist' do
 end
 ```
 
+Django example (views.py)
+```python
+from django.http import HttpResponse
+import plistlib
+
+def property_list(request):
+    d = { 
+         'Greeting':"Hello, World", 
+         'Price':4.20, 
+         'FeatureXIsLaunched':True, 
+         'Status':1 
+    }
+    
+    return HttpResponse(plistlib.writePlistToString(d))
+```
+
 ### Creators
 
 [Mattt Thompson](http://github.com/mattt)  
