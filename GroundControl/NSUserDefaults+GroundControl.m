@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 #import "NSUserDefaults+GroundControl.h"
-#import "AFPropertyListRequestOperation.h"
+
 
 @interface NSUserDefaults (_GroundControl)
 + (NSOperationQueue *)gc_sharedPropertyListRequestOperationQueue;
@@ -70,21 +70,20 @@
                                success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *defaults))success
                                failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
-    AFPropertyListRequestOperation *requestOperation = [[AFPropertyListRequestOperation alloc] initWithRequest:urlRequest];
-    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self registerDefaults:responseObject];
-        [self synchronize];
+    [NSURLConnection sendAsynchronousRequest:urlRequest queue:[[self class] gc_sharedPropertyListRequestOperationQueue] completionHandler:^(NSURLResponse *response, NSData *responseData, NSError *error) {
         
-        if (success) {
-            success(operation.request, operation.response, responseObject);
+        if (!error) {
+            NSLog(@"%@", [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding]);
+                        
+            NSDictionary *myDictionary = [[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding] propertyListFromStringsFileFormat];
+            
+            [self registerDefaults:myDictionary];
+            [self synchronize];
+            
+            success(urlRequest, (NSHTTPURLResponse *)response, myDictionary);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (failure) {
-            failure(operation.request, operation.response, error);
-        }
-    }];
-    
-    [[[self class] gc_sharedPropertyListRequestOperationQueue] addOperation:requestOperation];
-}
+        else failure(urlRequest, (NSHTTPURLResponse *)response, error);
+        
+    }];}
 
 @end
