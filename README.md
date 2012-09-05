@@ -60,7 +60,6 @@ Django example (views.py)
 ```python
 from django.http import HttpResponse
 import plistlib
-import tempfile
 
 def property_list(request):
     d = { 
@@ -70,26 +69,7 @@ def property_list(request):
          'Status':1 
     }
     
-    output_file = tempfile.NamedTemporaryFile()
-    
-    try:
-        plistlib.writePlist(d, output_file)
-        output_file.seek(0)
-        plist = output_file.read()
-    except:
-        plist = """<?xml version="1.0" encoding="UTF-8"?>
-                <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-                <plist version="1.0">
-                <dict>
-                <key>Status</key>
-                <integer>0</integer>
-                </dict>
-                </plist>
-                """
-    finally:
-        output_file.close()
-    
-    return HttpResponse(plist)
+    return HttpResponse(plistlib.writePlistToString(d))
 ```
 
 ### Creators
