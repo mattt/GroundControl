@@ -7,8 +7,6 @@ Many developers don't realize that they are allowed to remotely control the beha
 
 GroundControl gives you a dead-simple way to remotely configure your app, allowing you to add things like [feature flags](http://code.flickr.com/blog/2009/12/02/flipping-out/), impromptu [A/B tests](http://en.wikipedia.org/wiki/A/B_testing), or a simple ["message of the day"](http://en.wikipedia.org/wiki/Motd_(Unix)).
 
-It's built on top of [AFNetworking](https://github.com/afnetworking/afnetworking), and provides a single category on `NSUserDefaults` (just add `#import "NSUserDefaults+GroundControl.h"` to the top of any file you want to use it in).
-
 ## Client Code
 
 ```objective-c
