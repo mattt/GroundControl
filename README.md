@@ -39,7 +39,9 @@ It's built on top of [AFNetworking](https://github.com/afnetworking/afnetworking
 
 ## Server Code
 
-GroundControl asynchronously downloads and reads a remote plist file. This could be a static file or served dynamically. Either way, since property lists aren't especially fun to write by hand, you can generate and serve one rather easily using the `plist` and `sinatra` gems (full working version can be found in example/server):
+GroundControl asynchronously downloads and reads a remote plist file. This could be a static file or generated dynamically, like in the following examples (see also the complete Sinatra application found in `example/server`):
+
+### Ruby
 
 ```ruby
 require 'sinatra'
@@ -56,7 +58,8 @@ get '/defaults.plist' do
 end
 ```
 
-Django example (views.py)
+### Python
+
 ```python
 from django.http import HttpResponse
 import plistlib
