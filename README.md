@@ -31,7 +31,7 @@ It's built on top of [AFNetworking](https://github.com/afnetworking/afnetworking
 ```objective-c
   NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
-  [[NSUserDefaults standardUserDefaults] registerDefaultsWithURLRequest:URL
+  [[NSUserDefaults standardUserDefaults] registerDefaultsWithURLRequest:request
                                                                 success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *defaults) { ... }
                                                                 failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) { ... }
   ];
