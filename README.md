@@ -56,7 +56,7 @@ get '/defaults.plist' do
 end
 ```
 
-### Creators
+### Contact
 
 [Mattt Thompson](http://github.com/mattt)  
 [@mattt](https://twitter.com/mattt)
