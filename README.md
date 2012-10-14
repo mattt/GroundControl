@@ -31,7 +31,7 @@ It's built on top of [AFNetworking](https://github.com/afnetworking/afnetworking
 ```objective-c
   NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
-  [[NSUserDefaults standardUserDefaults] registerDefaultsWithURLRequest:URL
+  [[NSUserDefaults standardUserDefaults] registerDefaultsWithURLRequest:request
                                                                 success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *defaults) { ... }
                                                                 failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) { ... }
   ];
@@ -39,7 +39,9 @@ It's built on top of [AFNetworking](https://github.com/afnetworking/afnetworking
 
 ## Server Code
 
-GroundControl asynchronously downloads and reads a remote plist file. This could be a static file or served dynamically. Either way, since property lists aren't especially fun to write by hand, you can generate and serve one rather easily using the `plist` and `sinatra` gems (full working version can be found in example/server):
+GroundControl asynchronously downloads and reads a remote plist file. This could be a static file or generated dynamically, like in the following examples (see also the complete Sinatra application found in `example/server`):
+
+### Ruby
 
 ```ruby
 require 'sinatra'
@@ -54,6 +56,23 @@ get '/defaults.plist' do
     'FeatureXIsLaunched' => true
   }.to_plist
 end
+```
+
+### Python
+
+```python
+from django.http import HttpResponse
+import plistlib
+
+def property_list(request):
+    d = { 
+         'Greeting':"Hello, World", 
+         'Price':4.20, 
+         'FeatureXIsLaunched':True, 
+         'Status':1 
+    }
+    
+    return HttpResponse(plistlib.writePlistToString(d))
 ```
 
 ### Contact
