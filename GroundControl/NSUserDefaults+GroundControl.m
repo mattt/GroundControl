@@ -72,7 +72,9 @@
 {
     AFPropertyListRequestOperation *requestOperation = [[AFPropertyListRequestOperation alloc] initWithRequest:urlRequest];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self registerDefaults:responseObject];
+        // registerDefaults: does not save to disk!
+        // to access settings when URL request fails (network unavailable), set as normal defaults.
+        [self setValuesForKeysWithDictionary:responseObject];
         [self synchronize];
         
         if (success) {
