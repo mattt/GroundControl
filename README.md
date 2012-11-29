@@ -9,6 +9,8 @@ GroundControl gives you a dead-simple way to remotely configure your app, allowi
 
 It's built on top of [AFNetworking](https://github.com/afnetworking/afnetworking), and provides a single category on `NSUserDefaults` (just add `#import "NSUserDefaults+GroundControl.h"` to the top of any file you want to use it in).
 
+> This project is part of a series of open source libraries covering the mission-critical aspects of an iOS app's infrastructure. Be sure to check out its sister projects: [SkyLab](https://github.com/mattt/SkyLab), [CargoBay](https://github.com/mattt/CargoBay), [houston](https://github.com/mattt/houston), and [Orbiter](https://github.com/mattt/Orbiter).
+
 ## Client Code
 
 ```objective-c
