@@ -50,12 +50,12 @@
                         success:(void (^)(NSDictionary *defaults))success
                         failure:(void (^)(NSError *error))failure
 {
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    [request setHTTPShouldHandleCookies:NO];
-    [request setHTTPShouldUsePipelining:YES];
-    [request addValue:@"application/x-plist" forHTTPHeaderField:@"Accept"];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
+    [urlRequest setHTTPShouldHandleCookies:NO];
+    [urlRequest setHTTPShouldUsePipelining:YES];
+    [urlRequest addValue:@"application/x-plist" forHTTPHeaderField:@"Accept"];
     
-    [self registerDefaultsWithURLRequest:request success:^(__unused NSURLRequest *request, __unused NSHTTPURLResponse *response, NSDictionary *defaults) {
+    [self registerDefaultsWithURLRequest:urlRequest success:^(__unused NSURLRequest *request, __unused NSHTTPURLResponse *response, NSDictionary *defaults) {
         if (success) {
             success(defaults);
         }
