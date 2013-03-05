@@ -72,7 +72,7 @@
 {
     AFPropertyListRequestOperation *requestOperation = [[AFPropertyListRequestOperation alloc] initWithRequest:urlRequest];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self registerDefaults:responseObject];
+        [self setValuesForKeysWithDictionary:responseObject];
         [self synchronize];
         
         if (success) {
