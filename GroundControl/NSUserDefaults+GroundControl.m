@@ -21,7 +21,7 @@
 // THE SOFTWARE.
 
 #import "NSUserDefaults+GroundControl.h"
-#import "AFPropertyListRequestOperation.h"
+#import "AFHTTPRequestOperation.h"
 
 @interface NSUserDefaults (_GroundControl)
 + (NSOperationQueue *)gc_sharedPropertyListRequestOperationQueue;
@@ -70,7 +70,8 @@
                                success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *defaults))success
                                failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
-    AFPropertyListRequestOperation *requestOperation = [[AFPropertyListRequestOperation alloc] initWithRequest:urlRequest];
+    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
+    requestOperation.responseSerializer = [AFPropertyListResponseSerializer serializer];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self setValuesForKeysWithDictionary:responseObject];
         [self synchronize];
