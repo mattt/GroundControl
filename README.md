@@ -14,33 +14,33 @@ It's built on top of [AFNetworking](https://github.com/afnetworking/afnetworking
 ## Client Code
 
 ```objective-c
-  NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
-  [[NSUserDefaults standardUserDefaults] registerDefaultsWithURL:URL];
+NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
+[[NSUserDefaults standardUserDefaults] registerDefaultsWithURL:URL];
 ```
 
 ...or if you need callbacks for success/failure, and prefer not to listen for a `NSUserDefaultsDidChangeNotification`:
 
 ```objective-c
-  NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
-  [[NSUserDefaults standardUserDefaults] registerDefaultsWithURL:URL
-    success:^(NSDictionary *) { 
-      // ... 
-  } failure:^(NSError *) { 
-      // ...
-  }];
+NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
+[[NSUserDefaults standardUserDefaults] registerDefaultsWithURL:URL
+  success:^(NSDictionary *) { 
+    // ... 
+} failure:^(NSError *) { 
+    // ...
+}];
 ```
 
 ...or if you need to use an HTTP method other than GET, or need to set any special headers, specify an `NSURLRequest`:
 
 ```objective-c
-  NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
-  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
-  [[NSUserDefaults standardUserDefaults] registerDefaultsWithURLRequest:request
-    success:^(NSURLRequest *, NSHTTPURLResponse *, NSDictionary *) { 
-      // ... 
-  } failure:^(NSURLRequest *, NSHTTPURLResponse *, NSError *) { 
-      // ... 
-  }];
+NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
+NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+[[NSUserDefaults standardUserDefaults] registerDefaultsWithURLRequest:request
+  success:^(NSURLRequest *, NSHTTPURLResponse *, NSDictionary *) { 
+    // ... 
+} failure:^(NSURLRequest *, NSHTTPURLResponse *, NSError *) { 
+    // ... 
+}];
 ```
 
 ## Server Code
