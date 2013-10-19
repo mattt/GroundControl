@@ -23,9 +23,11 @@ It's built on top of [AFNetworking](https://github.com/afnetworking/afnetworking
 ```objective-c
   NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
   [[NSUserDefaults standardUserDefaults] registerDefaultsWithURL:URL
-                                                         success:^(NSDictionary *defaults) { ... }
-                                                         failure:^(NSError *error) { ... }
-  ];
+    success:^(NSDictionary *) { 
+      // ... 
+  } failure:^(NSError *) { 
+      // ...
+  }];
 ```
 
 ...or if you need to use an HTTP method other than GET, or need to set any special headers, specify an `NSURLRequest`:
@@ -34,9 +36,11 @@ It's built on top of [AFNetworking](https://github.com/afnetworking/afnetworking
   NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
   [[NSUserDefaults standardUserDefaults] registerDefaultsWithURLRequest:request
-                                                                success:^(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *defaults) { ... }
-                                                                failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) { ... }
-  ];
+    success:^(NSURLRequest *, NSHTTPURLResponse *, NSDictionary *) { 
+      // ... 
+  } failure:^(NSURLRequest *, NSHTTPURLResponse *, NSError *) { 
+      // ... 
+  }];
 ```
 
 ## Server Code
@@ -67,14 +71,40 @@ from django.http import HttpResponse
 import plistlib
 
 def property_list(request):
-    d = { 
-         'Greeting':"Hello, World", 
-         'Price':4.20, 
-         'FeatureXIsLaunched':True, 
-         'Status':1 
+    plist = { 
+         'Greeting': "Hello, World", 
+         'Price': 4.20, 
+         'FeatureXIsLaunched': True, 
+         'Status': 1 
     }
     
-    return HttpResponse(plistlib.writePlistToString(d))
+    return HttpResponse(plistlib.writePlistToString(plist))
+```
+
+### Node.js
+
+```javascript
+var plist = require('plist'),
+    express = require('express')
+
+var host = "127.0.0.1"
+var port = 8080
+
+var app = express()
+app.use(app.router)
+
+app.get("/", function(request, response) { 
+        response.send(plist.build(
+            {
+                'Greeting': "Hello, World", 
+                'Price': 4.20, 
+                'FeatureXIsLaunched': true, 
+                'Status': 1
+            }
+        ).toString())
+})
+
+app.listen(port, host)
 ```
 
 ### Contact
