@@ -50,6 +50,7 @@
                         success:(void (^)(NSDictionary *defaults))success
                         failure:(void (^)(NSError *error))failure
 {
+    [self _setInitialValues];
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
     [urlRequest setHTTPShouldHandleCookies:NO];
     [urlRequest setHTTPShouldUsePipelining:YES];
@@ -86,6 +87,13 @@
     }];
     
     [[[self class] gc_sharedPropertyListRequestOperationQueue] addOperation:requestOperation];
+}
+
+- (void)_setInitialValues {
+    NSURL *initialValuesURL = [[NSBundle mainBundle] URLForResource:@"GroundControl" withExtension:@"plist"];
+    NSDictionary *initialValues = [NSDictionary dictionaryWithContentsOfURL:initialValuesURL];
+    [self setValuesForKeysWithDictionary:initialValues];
+    [self synchronize];
 }
 
 @end
