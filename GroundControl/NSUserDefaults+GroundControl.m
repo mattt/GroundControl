@@ -23,6 +23,8 @@
 #import "NSUserDefaults+GroundControl.h"
 #import "AFHTTPRequestOperation.h"
 
+static NSString * const GroundControlInitialValuesSet = @"GroundControlInitialValuesSet";
+
 @interface NSUserDefaults (_GroundControl)
 + (NSOperationQueue *)gc_sharedPropertyListRequestOperationQueue;
 @end
@@ -90,10 +92,13 @@
 }
 
 - (void)_setInitialValues {
-    NSURL *initialValuesURL = [[NSBundle mainBundle] URLForResource:@"GroundControl" withExtension:@"plist"];
-    NSDictionary *initialValues = [NSDictionary dictionaryWithContentsOfURL:initialValuesURL];
-    [self setValuesForKeysWithDictionary:initialValues];
-    [self synchronize];
+    if ([self boolForKey:GroundControlInitialValuesSet] == NO) {
+        [self setBool:YES forKey:GroundControlInitialValuesSet];
+        NSURL *initialValuesURL = [[NSBundle mainBundle] URLForResource:@"GroundControl" withExtension:@"plist"];
+        NSDictionary *initialValues = [NSDictionary dictionaryWithContentsOfURL:initialValuesURL];
+        [self setValuesForKeysWithDictionary:initialValues];
+        [self synchronize];
+    }
 }
 
 @end
