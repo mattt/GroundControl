@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5056681F181630A300238324 /* GroundControl.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5056681E181630A300238324 /* GroundControl.plist */; };
 		5086013117F8502500414731 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5086013017F8502500414731 /* Security.framework */; };
 		5086013217F8505700414731 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5086012E17F84FFD00414731 /* SystemConfiguration.framework */; };
 		F8A56A4E1812C66B004E454E /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A56A3C1812C66B004E454E /* AFHTTPRequestOperation.m */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5056681E181630A300238324 /* GroundControl.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = GroundControl.plist; sourceTree = "<group>"; };
 		5086012E17F84FFD00414731 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		5086013017F8502500414731 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F8A56A3B1812C66B004E454E /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				F8C0BC8515F1743400DC38E6 /* main.m */,
 				F8C0BC9015F174B400DC38E6 /* Prefix.pch */,
 				F8C0BC8E15F174AF00DC38E6 /* Info.plist */,
+				5056681E181630A300238324 /* GroundControl.plist */,
 				F8C0BC7F15F1743400DC38E6 /* en.lproj */,
 			);
 			name = GroundControl;
@@ -210,6 +213,7 @@
 			files = (
 				F8C0BC8915F1743400DC38E6 /* ViewController.xib in Resources */,
 				F8CD8EC116B476F100B8B0E4 /* Default-568h@2x.png in Resources */,
+				5056681F181630A300238324 /* GroundControl.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
