@@ -23,6 +23,8 @@
 #import "NSUserDefaults+GroundControl.h"
 #import "AFHTTPRequestOperation.h"
 
+#import <objc/runtime.h>
+
 @interface NSUserDefaults (_GroundControl)
 + (NSOperationQueue *)gc_sharedPropertyListRequestOperationQueue;
 @end
@@ -41,6 +43,15 @@
     return _sharedPropertyListRequestOperationQueue;
 }
 
+- (id <AFURLResponseSerialization>)responseSerializer {
+    return objc_getAssociatedObject(self, @selector(responseSerializer));;
+}
+
+- (void)setResponseSerializer:(id <AFURLResponseSerialization>)responseSerializer {
+    objc_setAssociatedObject(self, @selector(responseSerializer), responseSerializer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+#pragma mark -
 
 - (void)registerDefaultsWithURL:(NSURL *)url {
     [self registerDefaultsWithURL:url success:nil failure:nil];
@@ -71,7 +82,7 @@
                                failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
 {
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
-    requestOperation.responseSerializer = [AFPropertyListResponseSerializer serializer];
+    requestOperation.responseSerializer = self.responseSerializer ? self.responseSerializer : [AFPropertyListResponseSerializer serializer];
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self setValuesForKeysWithDictionary:responseObject];
         [self synchronize];
