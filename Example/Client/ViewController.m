@@ -22,10 +22,6 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
-- (void)updateValues;
-@end
-
 @implementation ViewController
 
 - (void)updateValues {
@@ -43,11 +39,6 @@
     }];
     
     [self updateValues];
-}
-
-- (void)viewDidUnload {
-    _greetingLabel = nil;
-    [super viewDidUnload];
 }
 
 @end
