@@ -22,12 +22,18 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AFURLResponseSerialization.h"
+@protocol AFURLRequestSerialization;
+@protocol AFURLResponseSerialization;
 
 /**
  
  */
 @interface NSUserDefaults (GroundControl)
+
+/**
+
+ */
+@property (nonatomic, strong) id <AFURLRequestSerialization> requestSerializer;
 
 /**
  

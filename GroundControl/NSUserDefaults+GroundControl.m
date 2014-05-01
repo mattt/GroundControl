@@ -22,6 +22,8 @@
 
 #import "NSUserDefaults+GroundControl.h"
 #import "AFHTTPRequestOperation.h"
+#import "AFURLRequestSerialization.h"
+#import "AFURLResponseSerialization.h"
 
 #import <objc/runtime.h>
 
@@ -43,8 +45,16 @@
     return _sharedPropertyListRequestOperationQueue;
 }
 
+- (id <AFURLRequestSerialization>)requestSerializer {
+    return objc_getAssociatedObject(self, @selector(requestSerializer));
+}
+
+- (void)setRequestSerializer:(id <AFURLRequestSerialization>)requestSerializer {
+    objc_setAssociatedObject(self, @selector(requestSerializer), requestSerializer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 - (id <AFURLResponseSerialization>)responseSerializer {
-    return objc_getAssociatedObject(self, @selector(responseSerializer));;
+    return objc_getAssociatedObject(self, @selector(responseSerializer));
 }
 
 - (void)setResponseSerializer:(id <AFURLResponseSerialization>)responseSerializer {
@@ -61,10 +71,17 @@
                         success:(void (^)(NSDictionary *defaults))success
                         failure:(void (^)(NSError *error))failure
 {
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:url];
-    [urlRequest setHTTPShouldHandleCookies:NO];
-    [urlRequest setHTTPShouldUsePipelining:YES];
-    [urlRequest addValue:@"application/x-plist" forHTTPHeaderField:@"Accept"];
+    id <AFURLRequestSerialization> requestSerializer = self.requestSerializer ? self.requestSerializer : [AFPropertyListRequestSerializer serializer];
+
+    NSError *error = nil;
+    NSURLRequest *urlRequest = [requestSerializer requestBySerializingRequest:[NSURLRequest requestWithURL:url]  withParameters:nil error:&error];
+    if (error) {
+        if (failure) {
+            failure(error);
+        }
+
+        return;
+    }
     
     [self registerDefaultsWithURLRequest:urlRequest success:^(__unused NSURLRequest *request, __unused NSHTTPURLResponse *response, NSDictionary *defaults) {
         if (success) {
