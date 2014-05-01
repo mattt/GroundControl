@@ -10,6 +10,7 @@
 		5086013117F8502500414731 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5086013017F8502500414731 /* Security.framework */; };
 		5086013217F8505700414731 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5086012E17F84FFD00414731 /* SystemConfiguration.framework */; };
 		F88A59B11912C1C0002A429C /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = F88A59B01912C1C0002A429C /* AFURLRequestSerialization.m */; };
+		F88A59B31912C3A0002A429C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F88A59B21912C3A0002A429C /* MobileCoreServices.framework */; };
 		F8A56A4E1812C66B004E454E /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A56A3C1812C66B004E454E /* AFHTTPRequestOperation.m */; };
 		F8A56A531812C66B004E454E /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A56A471812C66B004E454E /* AFURLConnectionOperation.m */; };
 		F8A56A551812C66B004E454E /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = F8A56A4B1812C66B004E454E /* AFURLResponseSerialization.m */; };
@@ -30,6 +31,7 @@
 		5086013017F8502500414731 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F88A59AF1912C1C0002A429C /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLRequestSerialization.h; sourceTree = "<group>"; };
 		F88A59B01912C1C0002A429C /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLRequestSerialization.m; sourceTree = "<group>"; };
+		F88A59B21912C3A0002A429C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		F8A56A3B1812C66B004E454E /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		F8A56A3C1812C66B004E454E /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		F8A56A461812C66B004E454E /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F88A59B31912C3A0002A429C /* MobileCoreServices.framework in Frameworks */,
 				5086013217F8505700414731 /* SystemConfiguration.framework in Frameworks */,
 				5086013117F8502500414731 /* Security.framework in Frameworks */,
 				F8C0BC5A15F173F500DC38E6 /* UIKit.framework in Frameworks */,
@@ -111,6 +114,7 @@
 		F8C0BC5815F173F500DC38E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F88A59B21912C3A0002A429C /* MobileCoreServices.framework */,
 				5086013017F8502500414731 /* Security.framework */,
 				5086012E17F84FFD00414731 /* SystemConfiguration.framework */,
 				F8C0BC5915F173F500DC38E6 /* UIKit.framework */,
