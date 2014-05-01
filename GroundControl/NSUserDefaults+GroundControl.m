@@ -74,7 +74,7 @@
     id <AFURLRequestSerialization> requestSerializer = self.requestSerializer ? self.requestSerializer : [AFPropertyListRequestSerializer serializer];
 
     NSError *error = nil;
-    NSURLRequest *urlRequest = [requestSerializer requestBySerializingRequest:[NSURLRequest requestWithURL:url]  withParameters:nil error:&error];
+    NSURLRequest *urlRequest = [requestSerializer requestBySerializingRequest:[NSURLRequest requestWithURL:url] withParameters:nil error:&error];
     if (error) {
         if (failure) {
             failure(error);
