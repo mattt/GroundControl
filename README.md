@@ -23,9 +23,9 @@ NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
 ```objective-c
 NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
 [[NSUserDefaults standardUserDefaults] registerDefaultsWithURL:URL
-  success:^(NSDictionary *) { 
-    // ... 
-} failure:^(NSError *) { 
+  success:^(NSDictionary *) {
+    // ...
+} failure:^(NSError *) {
     // ...
 }];
 ```
@@ -36,10 +36,10 @@ NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
 NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
 NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
 [[NSUserDefaults standardUserDefaults] registerDefaultsWithURLRequest:request
-  success:^(NSURLRequest *, NSHTTPURLResponse *, NSDictionary *) { 
-    // ... 
-} failure:^(NSURLRequest *, NSHTTPURLResponse *, NSError *) { 
-    // ... 
+  success:^(NSURLRequest *, NSHTTPURLResponse *, NSDictionary *) {
+    // ...
+} failure:^(NSURLRequest *, NSHTTPURLResponse *, NSError *) {
+    // ...
 }];
 ```
 
@@ -71,13 +71,13 @@ from django.http import HttpResponse
 import plistlib
 
 def property_list(request):
-    plist = { 
-         'Greeting': "Hello, World", 
-         'Price': 4.20, 
-         'FeatureXIsLaunched': True, 
-         'Status': 1 
+    plist = {
+         'Greeting': "Hello, World",
+         'Price': 4.20,
+         'FeatureXIsLaunched': True,
+         'Status': 1
     }
-    
+
     return HttpResponse(plistlib.writePlistToString(plist))
 ```
 
@@ -92,12 +92,12 @@ var port = 8080
 
 var app = express()
 
-app.get("/", function(request, response) { 
+app.get("/", function(request, response) {
         response.send(plist.build(
             {
-                'Greeting': "Hello, World", 
-                'Price': 4.20, 
-                'FeatureXIsLaunched': true, 
+                'Greeting': "Hello, World",
+                'Price': 4.20,
+                'FeatureXIsLaunched': true,
                 'Status': 1
             }
         ).toString())
@@ -108,7 +108,7 @@ app.listen(port, host)
 
 ### Contact
 
-[Mattt Thompson](http://github.com/mattt)  
+[Mattt Thompson](http://github.com/mattt)
 [@mattt](https://twitter.com/mattt)
 
 ## License
