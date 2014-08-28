@@ -1,8 +1,6 @@
 # GroundControl
 **Remote configuration for iOS**
 
-> Break free of the two-week tyranny of the App Store approval process!
-
 Many developers don't realize that they are allowed to remotely control the behavior of their app (provided that the application isn't downloading any new code).
 
 GroundControl gives you a dead-simple way to remotely configure your app, allowing you to add things like [feature flags](http://code.flickr.com/blog/2009/12/02/flipping-out/), impromptu [A/B tests](http://en.wikipedia.org/wiki/A/B_testing), or a simple ["message of the day"](http://en.wikipedia.org/wiki/Motd_%28Unix%29).
@@ -23,9 +21,9 @@ NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
 ```objective-c
 NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
 [[NSUserDefaults standardUserDefaults] registerDefaultsWithURL:URL
-  success:^(NSDictionary *) { 
-    // ... 
-} failure:^(NSError *) { 
+  success:^(NSDictionary *) {
+    // ...
+} failure:^(NSError *) {
     // ...
 }];
 ```
@@ -36,10 +34,10 @@ NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
 NSURL *URL = [NSURL URLWithString:@"http://example.com/defaults.plist"];
 NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
 [[NSUserDefaults standardUserDefaults] registerDefaultsWithURLRequest:request
-  success:^(NSURLRequest *, NSHTTPURLResponse *, NSDictionary *) { 
-    // ... 
-} failure:^(NSURLRequest *, NSHTTPURLResponse *, NSError *) { 
-    // ... 
+  success:^(NSURLRequest *, NSHTTPURLResponse *, NSDictionary *) {
+    // ...
+} failure:^(NSURLRequest *, NSHTTPURLResponse *, NSError *) {
+    // ...
 }];
 ```
 
@@ -71,13 +69,13 @@ from django.http import HttpResponse
 import plistlib
 
 def property_list(request):
-    plist = { 
-         'Greeting': "Hello, World", 
-         'Price': 4.20, 
-         'FeatureXIsLaunched': True, 
-         'Status': 1 
+    plist = {
+         'Greeting': "Hello, World",
+         'Price': 4.20,
+         'FeatureXIsLaunched': True,
+         'Status': 1
     }
-    
+
     return HttpResponse(plistlib.writePlistToString(plist))
 ```
 
@@ -93,12 +91,12 @@ var port = 8080
 var app = express()
 app.use(app.router)
 
-app.get("/", function(request, response) { 
+app.get("/", function(request, response) {
         response.send(plist.build(
             {
-                'Greeting': "Hello, World", 
-                'Price': 4.20, 
-                'FeatureXIsLaunched': true, 
+                'Greeting': "Hello, World",
+                'Price': 4.20,
+                'FeatureXIsLaunched': true,
                 'Status': 1
             }
         ).toString())
@@ -107,12 +105,13 @@ app.get("/", function(request, response) {
 app.listen(port, host)
 ```
 
-### Contact
+## Contact
 
-[Mattt Thompson](http://github.com/mattt)  
-[@mattt](https://twitter.com/mattt)
+Mattt Thompson
+
+- http://github.com/mattt
+- http://twitter.com/mattt
 
 ## License
 
 GroundControl is available under the MIT license. See the LICENSE file for more info.
-
