@@ -89,7 +89,6 @@ var host = "127.0.0.1"
 var port = 8080
 
 var app = express()
-app.use(app.router)
 
 app.get("/", function(request, response) {
         response.send(plist.build(
