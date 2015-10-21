@@ -21,28 +21,27 @@
 // THE SOFTWARE.
 
 #import "NSUserDefaults+GroundControl.h"
-#import "AFHTTPRequestOperation.h"
+#import "AFHTTPSessionManager.h"
 #import "AFURLRequestSerialization.h"
 #import "AFURLResponseSerialization.h"
 
 #import <objc/runtime.h>
 
 @interface NSUserDefaults (_GroundControl)
-+ (NSOperationQueue *)gc_sharedPropertyListRequestOperationQueue;
++ (AFHTTPSessionManager *)gc_sharedAFHTTPSessionManager;
 @end
 
 @implementation NSUserDefaults (GroundControl)
 
-+ (NSOperationQueue *)gc_sharedPropertyListRequestOperationQueue {
-    static NSOperationQueue *_sharedPropertyListRequestOperationQueue = nil;
++ (AFHTTPSessionManager *)gc_sharedAFHTTPSessionManager {
+    static AFHTTPSessionManager *_sharedAFHTTPSessionManager = nil;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        _sharedPropertyListRequestOperationQueue = [[NSOperationQueue alloc] init];
-        [_sharedPropertyListRequestOperationQueue setMaxConcurrentOperationCount:NSOperationQueueDefaultMaxConcurrentOperationCount];
+        _sharedAFHTTPSessionManager = [AFHTTPSessionManager manager];
     });
     
-    return _sharedPropertyListRequestOperationQueue;
+    return _sharedAFHTTPSessionManager;
 }
 
 - (id <AFURLRequestSerialization>)requestSerializer {
@@ -71,49 +70,21 @@
                         success:(void (^)(NSDictionary *defaults))success
                         failure:(void (^)(NSError *error))failure
 {
-    id <AFURLRequestSerialization> requestSerializer = self.requestSerializer ? self.requestSerializer : [AFPropertyListRequestSerializer serializer];
-
-    NSError *error = nil;
-    NSURLRequest *urlRequest = [requestSerializer requestBySerializingRequest:[NSURLRequest requestWithURL:url] withParameters:nil error:&error];
-    if (error) {
-        if (failure) {
-            failure(error);
-        }
-
-        return;
-    }
+    AFHTTPSessionManager *manager = [[self class] gc_sharedAFHTTPSessionManager];
+    manager.responseSerializer = self.responseSerializer ? self.responseSerializer : [AFPropertyListResponseSerializer serializer];
     
-    [self registerDefaultsWithURLRequest:urlRequest success:^(__unused NSURLRequest *request, __unused NSHTTPURLResponse *response, NSDictionary *defaults) {
-        if (success) {
-            success(defaults);
-        }
-    } failure:^(__unused NSURLRequest *request, __unused NSHTTPURLResponse *response, NSError *error) {
-        if (failure) {
-            failure(error);
-        }
-    }];
-}
-
-- (void)registerDefaultsWithURLRequest:(NSURLRequest *)urlRequest
-                               success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *defaults))success
-                               failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
-{
-    AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
-    requestOperation.responseSerializer = self.responseSerializer ? self.responseSerializer : [AFPropertyListResponseSerializer serializer];
-    [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:url.absoluteString parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         [self setValuesForKeysWithDictionary:responseObject];
         [self synchronize];
         
         if (success) {
-            success(operation.request, operation.response, responseObject);
+            success(responseObject);
         }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
         if (failure) {
-            failure(operation.request, operation.response, error);
+            failure(error);
         }
     }];
-    
-    [[[self class] gc_sharedPropertyListRequestOperationQueue] addOperation:requestOperation];
 }
 
 @end

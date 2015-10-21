@@ -52,11 +52,4 @@
                         success:(void (^)(NSDictionary *defaults))success
                         failure:(void (^)(NSError *error))failure;
 
-/**
- 
- */
-- (void)registerDefaultsWithURLRequest:(NSURLRequest *)urlRequest
-                               success:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSDictionary *defaults))success
-                               failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure;
-
 @end
