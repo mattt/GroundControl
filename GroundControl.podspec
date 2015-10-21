@@ -3,10 +3,10 @@ Pod::Spec.new do |s|
   s.version  = '3.0.0'
   s.license  = 'MIT'
   s.summary  = 'Remote configuration for iOS.'
-  s.homepage = 'https://github.com/gshahbazian/GroundControl'
+  s.homepage = 'https://github.com/mattt/GroundControl'
   s.social_media_url = 'https://twitter.com/mattt'
   s.authors  = { 'Mattt Thompson' => 'm@mattt.me' }
-  s.source   = { :git => 'https://github.com/gshahbazian/GroundControl.git', :tag => '3.0.0' }
+  s.source   = { :git => 'https://github.com/mattt/GroundControl.git', :tag => '3.0.0' }
   s.source_files = 'GroundControl'
   s.requires_arc = true
 
