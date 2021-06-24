@@ -1,13 +1,13 @@
 # GroundControl
 **Remote configuration for iOS**
 
+> **Note**: This project is no longer being maintained.
+
 Many developers don't realize that they are allowed to remotely control the behavior of their app (provided that the application isn't downloading any new code).
 
 GroundControl gives you a dead-simple way to remotely configure your app, allowing you to add things like [feature flags](http://code.flickr.com/blog/2009/12/02/flipping-out/), impromptu [A/B tests](http://en.wikipedia.org/wiki/A/B_testing), or a simple ["message of the day"](http://en.wikipedia.org/wiki/Motd_%28Unix%29).
 
 It's built on top of [AFNetworking](https://github.com/afnetworking/afnetworking), and provides a single category on `NSUserDefaults` (just add `#import "NSUserDefaults+GroundControl.h"` to the top of any file you want to use it in).
-
-> This project is part of a series of open source libraries covering the mission-critical aspects of an iOS app's infrastructure. Be sure to check out its sister projects: [SkyLab](https://github.com/mattt/SkyLab), [CargoBay](https://github.com/mattt/CargoBay), [houston](https://github.com/mattt/houston), and [Orbiter](https://github.com/mattt/Orbiter).
 
 ## Client Code
 
@@ -103,13 +103,6 @@ app.get("/", function(request, response) {
 
 app.listen(port, host)
 ```
-
-## Contact
-
-Mattt Thompson
-
-- http://github.com/mattt
-- http://twitter.com/mattt
 
 ## License
 
